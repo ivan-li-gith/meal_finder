@@ -8,7 +8,7 @@ def get_preferences():
         st.session_state['dislikes_list'] = []
         
     # diet section
-    diet_options = ["Vegetarian", "Vegan", "Gluten-Free", "Keto", "Paleo", "Other"]
+    diet_options = ["Vegetarian", "Vegan", "Gluten-Free", "Keto", "Paleo"]
     user_diet = st.multiselect("Do you have a specific diet?", diet_options)
     final_diet = user_diet.copy()
     
@@ -19,7 +19,7 @@ def get_preferences():
         final_diet.extend([d.strip() for d in other_diet.split(",") if d.strip()])
 
     # cuisine section
-    cuisines = ["Italian", "Mexican", "Japanese", "Indian", "American", "Thai", "Mediterranean", "Other"]
+    cuisines = ["Chinese", "Italian", "Mexican", "Japanese", "Indian", "American", "Thai", "Mediterranean", "Other"]
     fav_cuisine = st.multiselect("Which cuisines do you love?", cuisines)
     final_cuisine = fav_cuisine.copy()
     
@@ -32,9 +32,7 @@ def get_preferences():
     st.divider()
     
     # dislike section
-    
     dislikes = st.text_input("Any ingredient you do not like to eat? (comma seperated)", placeholder="e.g. Cilantro, Mushrooms, Olives")
-    
     if st.button("Save my profile"):
         st.session_state['profile'] = {
             "diet": list(set(final_diet)),

@@ -1,5 +1,4 @@
 import streamlit as st
-import requests
 
 def display_header(recipe):
     st.image(recipe['image'], width='stretch')
@@ -26,9 +25,7 @@ def display_details(recipe):
     total_price = price_per_serving * servings
     st.write(f"Estimated Total Cost: {total_price:.2f}")
 
-
     missing_ig_count = len(recipe.get('missedIngredients', []))
-    
     st.write(f"Ready in: {recipe.get('readyInMinutes')} mins")
     st.write(f"Missing Ingredient Count: {missing_ig_count}")
     
@@ -40,3 +37,41 @@ def display_details(recipe):
         
     if missing_ig:
         st.error(f"Need: {', '.join(missing_ig)}")
+        
+def display_instructions(recipe):
+    instructions = recipe.get('analyzedInstructions')
+    
+    if instructions:
+        with st.expander("View Cooking Steps"):
+            for section in instructions:
+                for step in section.get('steps', []):
+                    st.write(f"Step {step['number']}: {step['step']}")
+    else:
+        st.write('Instructions unavailable. View link below.')
+    
+    st.markdown(f"View Full Recipe: {recipe.get('sourceUrl')}")
+    
+def display_all(recipes):
+    for recipe in recipes:
+        col1, col2 = st.columns([1,2])
+        
+        with col1:
+            display_header(recipe)
+        
+        with col2:
+            display_details(recipe)
+            
+            is_favorited = any(fav['id'] == recipe['id'] for fav in st.session_state['favorites'])
+            
+            if is_favorited:
+                if st.button(f"❤️ Unfavorite", key=f"fav_{recipe['id']}"):
+                    st.session_state['favorites'] = [fav for fav in st.session_state['favorites'] if fav['id'] != recipe['id']]
+                    st.rerun()
+            else:
+                if st.button(f"🤍 Favorite", key=f"fav_{recipe['id']}"):
+                    st.session_state['favorites'].append(recipe)
+                    st.toast(f"Added {recipe['title']} to favorites!")
+
+            display_instructions(recipe)
+        
+        st.divider()
