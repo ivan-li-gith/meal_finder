@@ -1,7 +1,12 @@
 import streamlit as st
 
 def display_header(recipe):
-    st.image(recipe['image'], width='stretch')
+    image_url = recipe.get('image')
+    
+    if image_url and image_url != "None":
+        st.image(recipe['image'], width='stretch')
+    else:
+        st.warning("No image provided for this recipe")
     
     # list cuisine types
     cuisines = recipe.get('cuisines', [])
@@ -52,6 +57,9 @@ def display_instructions(recipe):
     st.markdown(f"View Full Recipe: {recipe.get('sourceUrl')}")
     
 def display_all(recipes):
+    if 'favorites' not in st.session_state:
+        st.session_state['favorites'] = []
+        
     for recipe in recipes:
         col1, col2 = st.columns([1,2])
         
