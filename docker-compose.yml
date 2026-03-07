@@ -10,19 +10,19 @@ services:
     ports:
       - '3306:3306'
     volumes:
-      - ./init.sql:/docker-entrypoint-initdb.d/init.sql # Initializes your tables
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
       - db_data:/var/lib/mysql
 
   web:
     build: .
     ports:
-      - '80:8501' # Maps your EC2's port 80 to the app
+      - '80:8501' 
     depends_on:
       - db
     env_file:
-      - .env # Loads your DB_HOST, DB_USER, etc.
+      - .env 
     environment:
-      - DB_HOST=db # Inside the Docker network, the DB's hostname is 'db'
+      - DB_HOST=db 
 
 volumes:
   db_data:
