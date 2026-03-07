@@ -23,7 +23,7 @@ def init_db():
                 user_id INT PRIMARY KEY,
                 diet_json JSON,
                 cuisines_json JSON,
-                dislikes_json JSON,
+                dislikes_json JSON
             )
         """))
         
