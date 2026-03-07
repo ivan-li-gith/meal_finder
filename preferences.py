@@ -89,6 +89,7 @@ def get_preferences():
                   args=("dislikes", "dislikes_input"))
 
     st.divider()
+    save()
     
 
 def save():
