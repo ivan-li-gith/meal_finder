@@ -9,7 +9,12 @@ from database import init_db, load_user_data
 
 pages = ["Welcome", "Preferences", "Favorites", "Find a Recipe", "Substitutions", "My Cookbook"]
 
-
+if 'page' not in st.session_state:
+    st.session_state['page'] = 'Welcome'
+if 'favorites' not in st.session_state:
+    st.session_state['favorites'] = []
+if 'personal_recipes' not in st.session_state:
+    st.session_state['personal_recipes'] = []
 
 if 'init_db' not in st.session_state:
     init_db()
@@ -27,10 +32,7 @@ if 'init_db' not in st.session_state:
     
     st.session_state['init_db'] = True
 
-if 'page' not in st.session_state:
-    st.session_state['page'] = 'Welcome'
-if 'favorites' not in st.session_state:
-    st.session_state['favorites'] = []
+
     
 st.sidebar.title("Find a Meal")
 

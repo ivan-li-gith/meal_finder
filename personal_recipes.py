@@ -36,6 +36,7 @@ def personal_recipes_page():
                     add_fav_to_db(1, new_recipe, is_personal=True)
                     st.session_state['personal_recipes'].append(new_recipe)
                     st.success(f"Added {title} to cookbook")
+                    st.rerun()
                 else:
                     st.error("Please provide title, ingredients, and instructions")
                     
