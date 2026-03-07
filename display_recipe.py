@@ -82,6 +82,8 @@ def display_all(recipes):
                     add_fav_to_db(1, recipe)
                     st.session_state['favorites'].append(recipe)
                     st.toast(f"Added {recipe['title']} to favorites!")
+                    st.rerun()
+
 
             display_instructions(recipe)
         

@@ -13,10 +13,18 @@ pages = ["Welcome", "Preferences", "Favorites", "Find a Recipe", "Substitutions"
 
 if 'init_db' not in st.session_state:
     init_db()
-    saved_data = load_user_data(1)
-    st.session_state['profile'] = saved_data['profile']
-    st.session_state['favorites'] = saved_data['favorites']
-    st.session_state['personal_recipes'] = saved_data['personal']
+    
+    # Load User 1's data from RDS
+    try:
+        saved_data = load_user_data(1)
+        st.session_state['profile'] = saved_data['profile']
+        st.session_state['favorites'] = saved_data['favorites']
+        st.session_state['personal_recipes'] = saved_data['personal']
+    except Exception as e:
+        st.warning("Starting with a fresh session (no saved data found).")
+        st.session_state['profile'] = {"diet": [], "cuisines": [], "dislikes": []}
+        st.session_state['favorites'] = []
+    
     st.session_state['init_db'] = True
 
 if 'page' not in st.session_state:
@@ -26,11 +34,9 @@ if 'favorites' not in st.session_state:
     
 st.sidebar.title("Find a Meal")
 
-current_index = pages.index(st.session_state['page'])
 selection = st.sidebar.radio(
     "Go to", 
     pages, 
-    index=current_index,
     key="nav_selection"
 )
 

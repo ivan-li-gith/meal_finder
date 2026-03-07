@@ -11,8 +11,3 @@ def welcome_page():
     3. Discover Recipes: Get personalized, cost-effective meal suggestions
     4. Handle Substitutes: Missing an ingredient? Check the 'Substitutions' tool
     """)
-    
-    st.divider()
-    if st.button("Build Your Profile"):
-        st.session_state['page'] = 'Preferences'
-        st.rerun()

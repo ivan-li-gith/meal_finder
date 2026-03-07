@@ -106,8 +106,10 @@ def find_recipes():
                     num_cals
                 )
                 
-                if recipes:
-                    display_all(recipes)
-                else:
+                st.session_state['search_results'] = recipes
+                
+                if not recipes:
                     st.info("No recipes found. Try adding different ingredients.")
 
+    if 'search_results' in st.session_state and st.session_state['search_results']:
+        display_all(st.session_state['search_results'])
