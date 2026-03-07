@@ -3,7 +3,7 @@
 A web application designed to reduce food waste by discovering recipes based on real-time pantry inventory.
 
 ## Live Demo
-Access the application here: `http://18.119.17.127/`
+Access the application here: [Find a Meal](http://18.119.17.127/)
 
 ## Key Features
 * **Pantry-Based Discovery:** Search for recipes using specific ingredients on hand.
