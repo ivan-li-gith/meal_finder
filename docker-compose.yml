@@ -1,0 +1,28 @@
+version: '3.8'
+
+services:
+  db:
+    image: mysql:8.0
+    restart: always
+    environment:
+      MYSQL_DATABASE: 'find_a_meal'
+      MYSQL_ROOT_PASSWORD: 'findamealadminpass'
+    ports:
+      - '3306:3306'
+    volumes:
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql # Initializes your tables
+      - db_data:/var/lib/mysql
+
+  web:
+    build: .
+    ports:
+      - '80:8501' # Maps your EC2's port 80 to the app
+    depends_on:
+      - db
+    env_file:
+      - .env # Loads your DB_HOST, DB_USER, etc.
+    environment:
+      - DB_HOST=db # Inside the Docker network, the DB's hostname is 'db'
+
+volumes:
+  db_data:
