@@ -1,7 +1,8 @@
 import streamlit as st
 import requests
+import os
 
-DEFAULT_API_KEY = '3e40aacc93d64904b28abb657531f31b'
+API_KEY = os.environ.get("API_KEY")
 
 def substitution_page():
     st.title("Ingredient Substitution")
@@ -20,7 +21,7 @@ def substitution_page():
                 url = "https://api.spoonacular.com/food/ingredients/substitutes"
                 params = {
                     "ingredientName": ingredient.lower(),
-                    "apiKey": DEFAULT_API_KEY
+                    "apiKey": API_KEY
                 }
                 
                 try:

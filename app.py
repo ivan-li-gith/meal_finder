@@ -16,10 +16,9 @@ if 'favorites' not in st.session_state:
 if 'personal_recipes' not in st.session_state:
     st.session_state['personal_recipes'] = []
 
+# load data from rds
 if 'init_db' not in st.session_state:
     init_db()
-    
-    # Load User 1's data from RDS
     try:
         saved_data = load_user_data(1)
         st.session_state['profile'] = saved_data['profile']
@@ -32,8 +31,6 @@ if 'init_db' not in st.session_state:
     
     st.session_state['init_db'] = True
 
-
-    
 st.sidebar.title("Find a Meal")
 
 selection = st.sidebar.radio(
@@ -41,7 +38,6 @@ selection = st.sidebar.radio(
     pages, 
     key="nav_selection"
 )
-
 if selection != st.session_state['page']:
     st.session_state['page'] = selection
     st.rerun()

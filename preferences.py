@@ -94,5 +94,5 @@ def get_preferences():
 
 def save():
     if st.button("Save Profile Settings"):
-        save_profile_to_db(1, st.session_state['profile']) # Using 1 as a placeholder user_id
+        save_profile_to_db(1, st.session_state['profile'])
         st.success("Profile Saved to Database!")

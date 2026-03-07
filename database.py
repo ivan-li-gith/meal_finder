@@ -75,16 +75,12 @@ def remove_fav_from_db(user_id, recipe_id):
                             {"u_id": user_id, "r_id": str(recipe_id)})
         
 def load_user_data(user_id):
-    """Fetches everything for a user to populate session_state on startup."""
     engine = get_engine()
+    
     with engine.connect() as conn:
-        # Load Profile
+        # load profile favs and personal recipes
         prof_res = conn.execute(text("SELECT * FROM user_profiles WHERE user_id = :u_id"), {"u_id": user_id}).fetchone()
-        
-        # Load Favorites
         fav_res = conn.execute(text("SELECT recipe_data FROM favorites WHERE user_id = :u_id AND is_personal = FALSE"), {"u_id": user_id}).fetchall()
-        
-        # Load Personal Recipes
         pers_res = conn.execute(text("SELECT recipe_data FROM favorites WHERE user_id = :u_id AND is_personal = TRUE"), {"u_id": user_id}).fetchall()
         
         return {

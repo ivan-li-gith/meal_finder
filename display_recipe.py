@@ -84,7 +84,6 @@ def display_all(recipes):
                     st.toast(f"Added {recipe['title']} to favorites!")
                     st.rerun()
 
-
             display_instructions(recipe)
-        
+    
         st.divider()
