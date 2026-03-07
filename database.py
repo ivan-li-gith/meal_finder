@@ -19,20 +19,11 @@ def init_db():
     
     with engine.begin() as conn:
         conn.execute(text("""
-            CREATE TABLE IF NOT EXISTS users (
-                user_id INT AUTO_INCREMENT PRIMARY KEY,
-                username VARCHAR(50) UNIQUE NOT NULL,
-                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-            )
-        """))
-
-        conn.execute(text("""
             CREATE TABLE IF NOT EXISTS user_profiles (
                 user_id INT PRIMARY KEY,
                 diet_json JSON,
                 cuisines_json JSON,
                 dislikes_json JSON,
-                FOREIGN KEY (user_id) REFERENCES users(user_id) 
             )
         """))
         
@@ -40,9 +31,9 @@ def init_db():
             CREATE TABLE IF NOT EXISTS favorites (
                 fav_id INT AUTO_INCREMENT PRIMARY KEY,
                 user_id INT,
-                recipe_id INT NOT NULL,
+                recipe_id VARCHAR(100) NOT NULL,
                 recipe_data JSON NOT NULL,
-                FOREIGN KEY (user_id) REFERENCES users(user_id)
+                is_personal BOOLEAN DEFAULT FALSE
             )
         """))
 
