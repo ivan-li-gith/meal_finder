@@ -1,5 +1,6 @@
 import streamlit as st
 from display_recipe import display_all
+from database import add_fav_to_db
 
 def personal_recipes_page():
     st.title("My Cookbook")
@@ -32,6 +33,7 @@ def personal_recipes_page():
                         "image": "https://placehold.co/600x400?text=No+Image+Available"
                     }
                     
+                    add_fav_to_db(1, new_recipe, is_personal=True)
                     st.session_state['personal_recipes'].append(new_recipe)
                     st.success(f"Added {title} to cookbook")
                 else:

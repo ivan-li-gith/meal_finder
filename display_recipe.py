@@ -1,4 +1,5 @@
 import streamlit as st
+from database import remove_fav_from_db, add_fav_to_db
 
 def display_header(recipe):
     image_url = recipe.get('image')
@@ -73,10 +74,12 @@ def display_all(recipes):
             
             if is_favorited:
                 if st.button(f"❤️ Unfavorite", key=f"fav_{recipe['id']}"):
+                    remove_fav_from_db(1, recipe['id'])
                     st.session_state['favorites'] = [fav for fav in st.session_state['favorites'] if fav['id'] != recipe['id']]
                     st.rerun()
             else:
                 if st.button(f"🤍 Favorite", key=f"fav_{recipe['id']}"):
+                    add_fav_to_db(1, recipe)
                     st.session_state['favorites'].append(recipe)
                     st.toast(f"Added {recipe['title']} to favorites!")
 

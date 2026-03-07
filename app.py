@@ -5,8 +5,13 @@ from substitution import substitution_page
 from favorites import favorites_page
 from welcome import welcome_page
 from personal_recipes import personal_recipes_page
+from database import init_db
 
 pages = ["Welcome", "Preferences", "Favorites", "Find a Recipe", "Substitutions", "My Cookbook"]
+
+if 'init_db' not in st.session_state:
+    init_db()
+    st.session_state['init_db'] = True
 
 if 'page' not in st.session_state:
     st.session_state['page'] = 'Welcome'

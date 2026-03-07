@@ -1,4 +1,5 @@
 import streamlit as st
+from database import save_profile_to_db
 
 def add_custom_pref(category, input_key):
     new_item = st.session_state[input_key].strip().title()
@@ -89,6 +90,8 @@ def get_preferences():
 
     st.divider()
     
+
+def save():
     if st.button("Save Profile Settings"):
-        st.success("Profile Updated!")
-        st.balloons()
+        save_profile_to_db(1, st.session_state['profile']) # Using 1 as a placeholder user_id
+        st.success("Profile Saved to Database!")
