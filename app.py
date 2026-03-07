@@ -18,9 +18,12 @@ if 'page' not in st.session_state:
 if 'favorites' not in st.session_state:
     st.session_state['favorites'] = []
     
-current_index = pages.index(st.session_state['page'])
 st.sidebar.title("Find a Meal")
-selection = st.sidebar.radio("Go to", pages, index=current_index)
+selection = st.sidebar.radio(
+    "Go to", 
+    pages, 
+    key="nav_selection"
+)
 st.session_state['page'] = selection
     
 if st.session_state['page'] == 'Welcome':
