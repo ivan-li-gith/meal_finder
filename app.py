@@ -31,7 +31,7 @@ if 'init_db' not in st.session_state:
     
     st.session_state['init_db'] = True
 
-st.sidebar.title("Find a Meal")
+st.sidebar.title("Meal Finder")
 
 selection = st.sidebar.radio(
     "Go to", 

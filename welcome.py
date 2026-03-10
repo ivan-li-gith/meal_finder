@@ -1,7 +1,7 @@
 import streamlit as st
 
 def welcome_page():
-    st.title("Welcome to Find a Meal")
+    st.title("Welcome to Meal Finder")
     st.markdown("""
     This application helps you reduce food waste and save money by finding recipes based on what you already have in your pantry.
     
