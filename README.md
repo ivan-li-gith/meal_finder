@@ -1,4 +1,4 @@
-# Find a Meal
+# Meal Finder
 
 A web application designed to reduce food waste by discovering recipes based on real-time pantry inventory.
 
